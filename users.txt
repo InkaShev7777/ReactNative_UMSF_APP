@@ -1,0 +1,7 @@
+UsaerName:Alisa,Password:Alisa123,Role:R
+UsaerName:InkaShev777,Password:Ilya2905,Role:R
+UsaerName:Ruslan,Password:Ruslan123,Role:W
+UsaerName:r,Password:r,Role:R
+UsaerName:s,Password:s,Role:s
+UsaerName:Inka,Password:Inka,Role:TT
+UsaerName:InkaShev,Password:Ilya2905,Role:R

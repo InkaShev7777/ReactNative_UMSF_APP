@@ -1,0 +1,14 @@
+/Users/ilyaschevchenko/Desktop/test/umsfAPI
+/Users/ilyaschevchenko/Desktop/test/appsettings.Development.json
+/Users/ilyaschevchenko/Desktop/test/appsettings.json
+/Users/ilyaschevchenko/Desktop/test/umsfAPI.dll
+/Users/ilyaschevchenko/Desktop/test/umsfAPI.deps.json
+/Users/ilyaschevchenko/Desktop/test/umsfAPI.runtimeconfig.json
+/Users/ilyaschevchenko/Desktop/test/umsfAPI.pdb
+/Users/ilyaschevchenko/Desktop/test/Microsoft.AspNetCore.Server.Kestrel.Https.dll
+/Users/ilyaschevchenko/Desktop/test/Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.dll
+/Users/ilyaschevchenko/Desktop/test/Microsoft.OpenApi.dll
+/Users/ilyaschevchenko/Desktop/test/Newtonsoft.Json.dll
+/Users/ilyaschevchenko/Desktop/test/Swashbuckle.AspNetCore.Swagger.dll
+/Users/ilyaschevchenko/Desktop/test/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/ilyaschevchenko/Desktop/test/Swashbuckle.AspNetCore.SwaggerUI.dll
