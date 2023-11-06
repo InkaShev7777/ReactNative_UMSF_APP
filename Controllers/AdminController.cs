@@ -10,6 +10,29 @@ namespace umsfAPI.Controllers
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
+        private LowerAccessRights setRole;
+        public AdminController()
+        {
+            setRole = new LowerAccessRights();
+        }
+        //
+        //  GET
+        //
+        [HttpGet]
+        [Route("GetAllListUsers")]
+        public List<User> GetUsers()
+        {
+            return AdminManager.GetUsers();
+        }
+        [HttpGet]
+        [Route("GetRole")]
+        public string GetRole(string username)
+        {
+            return setRole.GetRole(username);
+        }
+        //
+        //  POST
+        //
         [HttpPost]
         [Route("DeleteUser")]
         public void DeleteUserByName(string username)
@@ -22,11 +45,11 @@ namespace umsfAPI.Controllers
         {
             AdminManager.UpdateUser(username, newRole);
         }
-        [HttpGet]
-        [Route("GetAllListUsers")]
-        public List<User> GetUsers()
+        [HttpPost]
+        [Route("LowRole")]
+        public void LowRole(string username)
         {
-            return AdminManager.GetUsers();
+            this.setRole.LowAccess(username);
         }
     }
 }
