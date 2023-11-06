@@ -22,8 +22,16 @@ export default class StartWindow extends React.Component{
         if(data.includes("User")){
           const tempMas = data.split(':');
           this.setState({userNow:tempMas[1]});
-          console.log(tempMas[1]);
+          this.props.setUserName(tempMas[1]);
           this.props.method();
+          axios
+        .post(`http://inkamonitor29-001-site1.ftempurl.com/Log/AddNewLog?action=User: ${tempMas[1]} authorized.`)
+        .then((response) => {
+           
+        })
+        .catch((error) => {
+          console.error(error);
+        });
         }
         if(data.includes("Admin")){
           this.props.adminMethod();

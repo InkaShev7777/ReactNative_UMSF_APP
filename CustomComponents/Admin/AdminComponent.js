@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, TextInput, StyleSheet,TouchableOpacity,Modal } from 'react-native';
 import axios from 'axios';
-
+import {Dropdown} from 'react-native-element-dropdown';
 
 
 class AdminComponent extends Component {
@@ -12,6 +12,10 @@ class AdminComponent extends Component {
             selectName:'',
             selectRole:'',
             showModal: false,
+            showModalAddUser:false,
+            userName:'',
+            password:'',
+            role:'',
         }
     }
     toggleModal = () => {
@@ -36,14 +40,30 @@ class AdminComponent extends Component {
         });
       }
   handleDeleteUser = (userName) => {
-    // Реализуйте логику удаления пользователя с заданным идентификатором userId
-    console.log(`Удален пользователь с UserName: ${userName}`);
+    axios
+    .post(`http://inkamonitor29-001-site1.ftempurl.com/Admin/DeleteUser?username=${userName}`)
+    .then((response) => {
+      this.componentDidMount();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
   handleUpdateUser = (userName,role) => {
     this.setState({selectName:userName,selectRole:role});
-    console.log(`Update пользователь с UserName: ${userName}`);
     this.toggleModal();
   };
+  updateUserData = () =>{
+    axios
+    .post(`http://inkamonitor29-001-site1.ftempurl.com/Admin/UpdateUser?username=${this.state.selectName}&newRole=${this.state.selectRole}`)
+    .then((response) => {
+      this.componentDidMount();
+      this.setState({showModal:false});
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   renderUser = ({ item }) => (
     <View style={styles.userItem}>
@@ -59,6 +79,18 @@ class AdminComponent extends Component {
     </View>
   );
 
+  addNewUser = () =>{
+    axios
+    .post(`http://inkamonitor29-001-site1.ftempurl.com/RegistarteNewUser/RegistrateUser?username=${this.state.userName}&password=${this.state.password}&role=${this.state.role}`)
+    .then((response) => {
+      this.componentDidMount();
+      this.setState({showModalAddUser:!this.state.showModalAddUser});
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -69,7 +101,7 @@ class AdminComponent extends Component {
           </TouchableOpacity>
           <Text style={styles.headerText}>List Users</Text>
           <TouchableOpacity style={styles.rightButton}>
-            <Text  style={{fontSize:30,color:'green'}}>+</Text>
+            <Text onPress={()=>{this.setState({showModalAddUser:!this.state.showModalAddUser})}}  style={{fontSize:30,color:'green'}}>+</Text>
           </TouchableOpacity>
         </View>
       
@@ -82,21 +114,50 @@ class AdminComponent extends Component {
         <Modal visible={this.state.showModal} animationType="slide">
           <View style={styles.modalContainer}>
             <Text style={styles.mainTitle}>Update User</Text>
+            
             <TextInput
               style={styles.input}
               placeholder="Enter Role"
               value={this.state.selectRole}
-              onChangeText={(text) => this.setState({ role: text })}
+              onChangeText={(text) => this.setState({ selectRole: text })}
             />
             <View style={styles.flexButton}>
-            <TouchableOpacity style={styles.button2} onPress={this.handleUpdateUser}>
+            <TouchableOpacity style={styles.button2} onPress={this.updateUserData}>
               <Text>Update User</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button3} onPress={this.toggleModal}>
               <Text>Close Modal</Text>
             </TouchableOpacity>
             </View>
-           
+          </View>
+        </Modal>
+        <Modal visible={this.state.showModalAddUser} animationType="slide">
+          <View style={styles.modalContainer}>
+            <Text style={styles.mainTitle}>Add new user</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Username"
+              value={this.state.userName}
+              onChangeText={(text) => this.setState({ userName: text })}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Password"
+              value={this.state.password}
+              onChangeText={(text) => this.setState({ password: text })}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Role"
+              value={this.state.role}
+              onChangeText={(text) => this.setState({ role: text })}
+            />
+            <TouchableOpacity style={styles.button2} onPress={this.addNewUser}>
+              <Text>Add User</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button3} onPress={()=>{this.setState({showModalAddUser:false})}}>
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       </View>
@@ -175,6 +236,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     marginBottom: 20,
+    borderRadius:10
   },
   header: {
     flexDirection: 'row',
@@ -194,6 +256,39 @@ const styles = StyleSheet.create({
   },
   rightButton: {
     marginLeft: 'auto',
+  },dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    marginBottom: 10,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
   },
 });
 
