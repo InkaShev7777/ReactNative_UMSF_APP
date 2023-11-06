@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,TextInput,Button,StyleSheet,TouchableOpacity,Modal } from "react-native";
+import { View,Text,TextInput,Button,StyleSheet,TouchableOpacity,Modal,Alert } from "react-native";
 import axios from 'axios';
 
 export default class UserWindow extends React.Component{
@@ -104,6 +104,8 @@ export default class UserWindow extends React.Component{
         //
         //  remove role from user (new method)
         //
+
+        Alert.alert("The answer is not correct");
         axios
       .post(`http://inkamonitor29-001-site1.ftempurl.com/Admin/LowRole?username=${this.state.username}`)
       .then((response) => {

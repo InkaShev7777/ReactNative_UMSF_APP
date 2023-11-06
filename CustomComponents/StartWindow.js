@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,Alert } from 'react-native';
 import axios from 'axios';
 
 export default class StartWindow extends React.Component{
@@ -33,8 +33,12 @@ export default class StartWindow extends React.Component{
           console.error(error);
         });
         }
-        if(data.includes("Admin")){
+        else if(data.includes("Admin")){
           this.props.adminMethod();
+        }
+        else{
+          Alert.alert("Password or login is not correct");
+          this.setState({username:'',password:''});
         }
       })
       .catch((error) => {

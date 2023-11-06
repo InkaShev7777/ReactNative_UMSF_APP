@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TextInput, StyleSheet,TouchableOpacity,Modal } from 'react-native';
+import { View, Text, FlatList, TextInput, StyleSheet,TouchableOpacity,Modal,Alert } from 'react-native';
 import axios from 'axios';
 import {Dropdown} from 'react-native-element-dropdown';
 
@@ -44,6 +44,7 @@ class AdminComponent extends Component {
     .post(`http://inkamonitor29-001-site1.ftempurl.com/Admin/DeleteUser?username=${userName}`)
     .then((response) => {
       this.componentDidMount();
+      Alert.alert("Success deleting");
     })
     .catch((error) => {
       console.error(error);
@@ -59,6 +60,7 @@ class AdminComponent extends Component {
     .then((response) => {
       this.componentDidMount();
       this.setState({showModal:false});
+      Alert.alert("Success updating");
     })
     .catch((error) => {
       console.error(error);
@@ -85,6 +87,7 @@ class AdminComponent extends Component {
     .then((response) => {
       this.componentDidMount();
       this.setState({showModalAddUser:!this.state.showModalAddUser});
+      Alert.alert("Success adding new user");
     })
     .catch((error) => {
       console.error(error);
